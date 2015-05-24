@@ -1,0 +1,42 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="row-fluid">
+
+    <div>
+        {% if current_user.is_authenticated() %}
+
+        <p class="lead">
+            <b>Dobrodošli {{current_user.firstname }} </b>
+        </p>
+        <p>
+            Aplikacija omogućava prikaz i ažuriranje podataka o lijekovima.
+            <br>Pretraga i ažuriranje omogućeno je na <a href="/admin/Drug">Lijekovi</a><br>
+            Pri kreiranja novog zapisa o lijeku sljedeći parametri bit će ponuđeni na<br> osnovu
+            postojećih zapisa u bazi: proizvođač, aktivna substanca, dodatne substance, režim<br>
+            izdavanja, tip esencijalne liste (ukoliko je lijek uvršten na listu)<br><br>
+
+            Moguće je kreiranje novih zapisa za ponuđene parametre <br>
+            Za dodavanje nove supstance u bazu odabrati <a href="/admin/substance">Substance</a><br>
+            Za dodavanje novog zapisa o režimu izdavanja odabrati <a href="/admin/regime">Režimi izdavanja</a><br>
+            Za dodavanje novog tipa esencijalne liste odabrati <a href="/admin/essentiallistcategory">Esencijalne liste</a><br>
+        </p>
+        {% else %}
+
+        <div class="login">
+        <p class="lead" >Dobrodošli</p>
+            <p>Za pretraživanje baze lijekova odaberite <a href="/admin/Drugs">Spisak lijekova</a><br>
+            <p>Za unos i ažuriranje podataka logovati se kao korisnik:<br>
+            username:&nbsp;&nbsp;    testuser@test.ba <br>
+            password:&nbsp;&nbsp;  te5tu5er.</p>
+            <form action="{{ url_for_security('login')  }}" method="get">
+            <button type="submit" class="btn btn-success">Log in &nbsp</button>
+            </form>
+        </div>
+
+
+    </div>
+
+    {% endif %}
+</div>
+{% endblock body %}
